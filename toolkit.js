@@ -26,7 +26,7 @@ const loginReducer = createReducer({ status: false }, (builder) => {
   });
 });
 
-// Membuat toko Redux dengan reducer yang telah dibuat
+// Membuat store Redux dengan reducer yang telah dibuat
 const store = configureStore({
   reducer: {
     login: loginReducer, // Menggunakan reducer login untuk status login
@@ -34,7 +34,7 @@ const store = configureStore({
   },
 });
 
-// Mencetak status awal toko
+// Mencetak status awal store
 console.log("oncreate store : ", store.getState());
 
 // Mendaftarkan langganan untuk mencetak perubahan status

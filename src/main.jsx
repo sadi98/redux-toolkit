@@ -8,6 +8,9 @@ import NotFound from './pages/404.jsx';
 import ProductsPage from './pages/products';
 import ProfilePage from './pages/profile';
 import DetailProductPage from './pages/detailProduct';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import Navbar from './components/Layouts/Navbar';
 
 const element = (
   <Router>
@@ -25,6 +28,9 @@ const element = (
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {element}
+    <Provider store={store}>
+      <Navbar/>
+      {element}
+    </Provider>
   </React.StrictMode>
 );
