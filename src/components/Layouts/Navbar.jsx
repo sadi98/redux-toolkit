@@ -4,6 +4,7 @@ import Button from '../Elements/Button'
 import { useSelector } from 'react-redux'
 import { useContext } from 'react'
 import { DarkMode } from '../../context/DarkMode'
+import { useTotalPrice } from '../../context/TotalPriceContext'
 
 const Navbar = () => {
     const username = useLogin()
@@ -12,6 +13,7 @@ const Navbar = () => {
 
     // useContext
     const {isDarkMode, setIsDarkMode} =useContext(DarkMode);
+    const {total} = useTotalPrice();
 
     useEffect(()=>{
         const sum = cart.reduce((acc, item) => {
@@ -35,7 +37,7 @@ const Navbar = () => {
         </Button>
         <Button className='ml-5 bg-black' onClick={handleLogout}>Logout</Button>
         <div className="flex items-center bg-gray-800 p-2 rounded-md ml-5">
-            {totalCart}
+           Items : {totalCart} | Price : {total}
         </div>
     </div>
   )

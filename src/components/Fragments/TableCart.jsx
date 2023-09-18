@@ -2,14 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { DarkMode } from '../../context/DarkMode';
 import { useContext } from 'react';
+import { useTotalPrice, useTotalPriceDispatch } from '../../context/TotalPriceContext';
 
 const TableCart = (props) => {
     const {products} = props;
     const totalPriceRef = useRef();
     const cart = useSelector((state) => state.cart.data);
-    const [getTotal, setTotal] = useState(0);
 
     const {isDarkMode} = useContext(DarkMode);
+    const dispatch = useTotalPriceDispatch()
+    const {total} = useTotalPrice();
 
     useEffect(() => {
         if (products.length > 0 && cart.length > 0) {
@@ -17,7 +19,7 @@ const TableCart = (props) => {
             const product = products.find((product) => product.id === item.id);
             return acc + product.price * item.qty;
           }, 0);
-          setTotal(sum);
+          dispatch({ type: "UPDATE", payload: { total: sum } })
     
           // Simpan cart ke dalam localStorage (pastikan cart adalah objek)
           localStorage.setItem("cart", JSON.stringify(cart));
@@ -64,7 +66,7 @@ const TableCart = (props) => {
                         </td>
                       <td>
                         <b>
-                            ${" "}{getTotal.toLocaleString("id-ID", { styles: "currency", currency: "USD" })}
+                            ${" "}{total.toLocaleString("id-ID", { styles: "currency", currency: "USD" })}
                         </b>
                       </td>
                     </tr>
