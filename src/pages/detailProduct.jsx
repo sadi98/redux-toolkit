@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { getDetailProduct } from "../services/product.service";
 import Button from "../components/Elements/Button";
 import useLogin from "../hooks/useLogin";
+import Navbar from "../components/Layouts/Navbar";
 
 const DetailProductPage = () => {
   const [product, setProduct] = useState({});
@@ -16,10 +17,7 @@ const DetailProductPage = () => {
   console.log(product);
   return (
     <>
-      <div className='flex justify-end h-20 bg-blue-600 text-white items-center px-10'>
-          <p className="mx-2">{username}</p>
-          <Button className='ml-5 bg-black'>Logout</Button>
-      </div>
+      <Navbar/>
       {Object.keys(product).length > 0 &&
         <div className="w-100 max-h-screen flex justify-center items-center mt-12">
           <div className="flex font-sans">
